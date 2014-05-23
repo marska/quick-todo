@@ -116,15 +116,10 @@
 
   <Grid>
     <Rectangle Stroke="Black" Opacity="0.5"/>
-    <Button x:Name="BtnAdd" Command="{Binding AddTodoCommand}"  Content="Button" HorizontalAlignment="Left" Margin="714,40,0,0" VerticalAlignment="Top" Width="60" Template="{DynamicResource AddButtonControlTemplate}" Height="60"/>
+    <Button x:Name="BtnAdd" IsDefault="true" Command="{Binding AddTodoCommand}"  Content="Button" HorizontalAlignment="Left" Margin="714,40,0,0" VerticalAlignment="Top" Width="60" Template="{DynamicResource AddButtonControlTemplate}" Height="60"/>
     <Button x:Name="BtnSettings" Command="{Binding ShowSettingsViewCommand}"  Content="Button" HorizontalAlignment="Left" Margin="758.75,1,0,0" VerticalAlignment="Top" Width="20" Template="{DynamicResource SettingsButtonControlTemplate}" Height="20"/>
     <Button x:Name="BtnClose" Content="Button" HorizontalAlignment="Left" Margin="778.75,1,0,0" VerticalAlignment="Top" Width="20" Template="{DynamicResource CloseButtonControlTemplate}" Height="20" Command="{Binding CloseApplicationCommand, Mode=OneWay}"/>
-    <TextBox x:Name="TbTodo" HorizontalAlignment="Left" Height="80" Margin="30,31,0,0" TextWrapping="NoWrap" Text="{Binding TodoTask.Text, Mode=TwoWay}" VerticalAlignment="Top" Width="651" FontSize="56" Style="{DynamicResource TodoTextBoxStyle}" SelectionBrush="#FF727272" BorderBrush="{x:Null}" FontFamily="Segoe UI Light" >
-      <TextBox.InputBindings>
-        <KeyBinding Key="Enter" Command="{Binding AddTodoCommand}"/>
-      </TextBox.InputBindings>
-    </TextBox>
+    <TextBox x:Name="TbTodo" HorizontalAlignment="Left" Height="80" Margin="30,31,0,0" TextWrapping="NoWrap" Text="{Binding TodoTask.Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="651" FontSize="56" Style="{DynamicResource TodoTextBoxStyle}" SelectionBrush="#FF727272" BorderBrush="{x:Null}" FontFamily="Segoe UI Light" />    
     <Label Content="HABIT RPG QUICK TODO" HorizontalAlignment="Left" Margin="344,1,0,0" VerticalAlignment="Top" FontFamily="Segoe UI Light" FontSize="14"/>
-
   </Grid>
 </Window>

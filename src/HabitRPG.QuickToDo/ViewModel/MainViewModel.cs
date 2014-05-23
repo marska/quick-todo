@@ -76,9 +76,9 @@ namespace HabitRPG.QuickToDo.ViewModel
       {
         Guid? result = await _todoRepository.Create(_todoTask.Text);
 
-        if (result.HasValue)
+        if (result.HasValue && result.Value != Guid.Empty)
         {
-          //Environment.Exit(0);
+          Environment.Exit(0);
         }
         else
         {

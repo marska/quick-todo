@@ -38,6 +38,8 @@ namespace HabitRPG.QuickToDo.Services
       {
         Properties.Settings.Default.UserId = settings.UserId.Value;
       }
+
+      Properties.Settings.Default.Save();
     }
   }
 }
