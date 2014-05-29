@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Windows;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -22,6 +23,8 @@ namespace HabitRPG.QuickToDo.ViewModel
     public RelayCommand CloseApplicationCommand { get; private set; }
 
     public RelayCommand AddTodoCommand { get; private set; }
+
+    public RelayCommand AddNextTodoCommand { get; private set; }
 
     public RelayCommand ShowSettingsViewCommand { get; private set; }
 
@@ -48,6 +51,7 @@ namespace HabitRPG.QuickToDo.ViewModel
       CloseApplicationCommand = new RelayCommand(CloseApplication);
       ShowSettingsViewCommand = new RelayCommand(ShowSettingsView);
       AddTodoCommand = new RelayCommand(AddTodo);
+      AddNextTodoCommand = new RelayCommand(AddNextTodo);
     }
 
     private void ShowSettingsView()
@@ -70,20 +74,11 @@ namespace HabitRPG.QuickToDo.ViewModel
       }
     }
 
-    private async void AddTodo()
+    private async Task<string> AddTodoTask()
     {
       try
       {
-        string result = await _todoRepository.Create(_todoTask.Text);
-
-        if (!string.IsNullOrWhiteSpace(result))
-        {
-          Environment.Exit(0);
-        }
-        else
-        {
-          _dialogService.ShowErrorMessage("Error: Something goes wrong");
-        }
+        return await _todoRepository.Create(_todoTask.Text);
       }
       catch (HttpRequestException ex)
       {
@@ -94,9 +89,7 @@ namespace HabitRPG.QuickToDo.ViewModel
           if (inner != null)
           {
             _dialogService.ShowErrorMessage(inner.Message);
-            return;
           }
-
         }
 
         _dialogService.ShowErrorMessage(ex.Message);
@@ -105,11 +98,26 @@ namespace HabitRPG.QuickToDo.ViewModel
       {
         _dialogService.ShowErrorMessage(ex.Message);
       }
+
+      return string.Empty;
+    }
+
+    private async void AddTodo()
+    {
+      await AddTodoTask();
+
+      Environment.Exit(0);
+    }
+
+    private async void AddNextTodo()
+    {
+      await AddTodoTask();
+
+      TodoTask = new TodoTask();
     }
 
     private void CloseApplication()
     {
-
       Environment.Exit(0);
     }
   }
