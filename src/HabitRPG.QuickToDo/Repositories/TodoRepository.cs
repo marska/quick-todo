@@ -19,11 +19,11 @@ namespace HabitRPG.QuickToDo.Repositories
       _habitRpgClient = habitRpgClient;
     }
 
-    public async Task<Guid?> Create(string todoTaskText)
+    public async Task<string> Create(string todoTaskText)
     {
       var todo = new Todo
       {
-        Id = Guid.NewGuid(),
+        Id = Guid.NewGuid().ToString(),
         Text = todoTaskText
       };
       

@@ -10,6 +10,10 @@ namespace HabitRPG.QuickToDo.Model
 
     private Guid? _userId;
 
+    private string _proxyHost;
+
+    private int _proxyPort;
+
     public Guid? ApiToken
     {
       get
@@ -32,6 +36,32 @@ namespace HabitRPG.QuickToDo.Model
       set
       {
         _userId = value;
+        OnPropertyChanged();
+      }
+    }
+    
+    public string ProxyHost
+    {
+      get
+      {
+        return _proxyHost;
+      }
+      set
+      {
+        _proxyHost = value;
+        OnPropertyChanged();
+      }
+    }
+
+    public int ProxyPort
+    {
+      get
+      {
+        return _proxyPort;
+      }
+      set
+      {
+        _proxyPort = value;
         OnPropertyChanged();
       }
     }

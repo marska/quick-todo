@@ -1,11 +1,9 @@
-﻿using System;
-using System.Threading.Tasks;
-using HabitRPG.QuickToDo.Model;
+﻿using System.Threading.Tasks;
 
 namespace HabitRPG.QuickToDo.Repositories
 {
   public interface ITodoRepository
   {
-    Task<Guid?> Create(string todoText);
+    Task<string> Create(string todoText);
   }
 }
