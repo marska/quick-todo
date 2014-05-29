@@ -11,11 +11,5 @@
     <Setting Name="ServiceUri" Type="(Web Service URL)" Scope="User">
       <Value Profile="(Default)">https://habitrpg.com/</Value>
     </Setting>
-    <Setting Name="ProxyHost" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="ProxyPort" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
-    </Setting>
   </Settings>
 </SettingsFile>
