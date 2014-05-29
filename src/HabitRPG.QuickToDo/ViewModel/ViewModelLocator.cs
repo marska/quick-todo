@@ -14,11 +14,8 @@
 
 using System;
 using System.Net;
-using System.Runtime.Remoting.Proxies;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using HabitRPG.Client;
-//using HabitRPG.QuickToDo.Model;
 using HabitRPG.QuickToDo.Helpers;
 using HabitRPG.QuickToDo.Repositories;
 using HabitRPG.QuickToDo.Services;
@@ -39,12 +36,8 @@ namespace HabitRPG.QuickToDo.ViewModel
     {
       ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-      IWebProxy proxy = null;
-
-      if (!string.IsNullOrWhiteSpace(Properties.Settings.Default.ProxyHost))
-      {
-        proxy = new WebProxy(Properties.Settings.Default.ProxyHost, Properties.Settings.Default.ProxyPort);
-      }
+      var proxy = WebRequest.DefaultWebProxy;
+      proxy.Credentials = CredentialCache.DefaultNetworkCredentials;
 
       SimpleIoc.Default.Register(
         () =>

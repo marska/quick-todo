@@ -76,7 +76,7 @@ namespace HabitRPG.QuickToDo.ViewModel
       {
         string result = await _todoRepository.Create(_todoTask.Text);
 
-        if (string.IsNullOrWhiteSpace(result))
+        if (!string.IsNullOrWhiteSpace(result))
         {
           Environment.Exit(0);
         }

@@ -19,13 +19,6 @@ namespace HabitRPG.QuickToDo.Services
         settings.UserId = Properties.Settings.Default.UserId;
       }
 
-      if (!string.IsNullOrWhiteSpace(Properties.Settings.Default.ProxyHost))
-      {
-        settings.ProxyHost = Properties.Settings.Default.ProxyHost;
-      }
-
-      settings.ProxyPort = Properties.Settings.Default.ProxyPort;
-
       return settings;
     }
 
@@ -45,10 +38,6 @@ namespace HabitRPG.QuickToDo.Services
       {
         Properties.Settings.Default.UserId = settings.UserId.Value;
       }
-
-      Properties.Settings.Default.ProxyHost = settings.ProxyHost;
-
-      Properties.Settings.Default.ProxyPort = settings.ProxyPort;
 
       Properties.Settings.Default.Save();
     }

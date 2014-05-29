@@ -4,7 +4,7 @@
 	x:Class="HabitRPG.QuickToDo.View.SettingsWindow"
 	x:Name="Window"
 	Title="Settings"
-	Width="427" Height="204.5" 
+	Width="427" Height="173.5" 
   ResizeMode="NoResize" 
   WindowStartupLocation="CenterOwner"
   ShowInTaskbar="False" 
@@ -20,12 +20,8 @@
     <TextBlock HorizontalAlignment="Left" Margin="10,55,0,0" TextWrapping="Wrap" Text="User ID" VerticalAlignment="Top" FontSize="16" FontFamily="Segoe UI Light"/>
     <TextBox Text="{Binding Settings.UserId, Mode=TwoWay}" HorizontalAlignment="Left" Height="26" Margin="92,55,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="325" FontSize="16" FontFamily="Segoe UI Light"/>
     <TextBox Text="{Binding Settings.ApiToken, Mode=TwoWay}" HorizontalAlignment="Left" Height="26" Margin="92,86,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="325" FontSize="16" FontFamily="Segoe UI Light"/>
-    <Button Command="{Binding SaveSettingsCommand}" CommandParameter="{Binding ElementName=Window}" Content="Save" HorizontalAlignment="Left" Margin="282,163,0,0" VerticalAlignment="Top" Width="65" FontSize="16" FontFamily="Segoe UI Light"/>
-    <Button Command="{Binding CloseWindowCommand}" CommandParameter="{Binding ElementName=Window}" Content="Cancel" HorizontalAlignment="Left" Margin="352,163,0,0" VerticalAlignment="Top" Width="65" FontSize="16" FontFamily="Segoe UI Light"/>
+    <Button Command="{Binding SaveSettingsCommand}" CommandParameter="{Binding ElementName=Window}" Content="Save" HorizontalAlignment="Left" Margin="282,137,0,0" VerticalAlignment="Top" Width="65" FontSize="16" FontFamily="Segoe UI Light"/>
+    <Button Command="{Binding CloseWindowCommand}" CommandParameter="{Binding ElementName=Window}" Content="Cancel" HorizontalAlignment="Left" Margin="352,137,0,0" VerticalAlignment="Top" Width="65" FontSize="16" FontFamily="Segoe UI Light"/>
     <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Settings" VerticalAlignment="Top" FontSize="22" FontFamily="Segoe UI Light"/>
-    <TextBox Text="{Binding Settings.ProxyHost, Mode=TwoWay}" HorizontalAlignment="Left" Height="26" Margin="92,117,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="246" FontSize="16" FontFamily="Segoe UI Light"/>
-    <TextBox Text="{Binding Settings.ProxyPort, Mode=TwoWay}" HorizontalAlignment="Left" Height="26" Margin="352,117,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="65" FontSize="16" FontFamily="Segoe UI Light"/>
-    <TextBlock HorizontalAlignment="Left" Margin="10,117,0,0" TextWrapping="Wrap" Text="Proxy" VerticalAlignment="Top" FontSize="16" RenderTransformOrigin="1.391,1.057" FontFamily="Segoe UI Light"/>
-    <TextBlock HorizontalAlignment="Left" Margin="343,117,0,0" TextWrapping="Wrap" Text=":" VerticalAlignment="Top" FontSize="16" RenderTransformOrigin="1.391,1.057" FontFamily="Segoe UI Light"/>
   </Grid>
 </Window>
