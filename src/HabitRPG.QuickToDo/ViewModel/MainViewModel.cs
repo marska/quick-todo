@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Globalization;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GoogleAnalyticsTracker.Simple;
 using HabitRPG.QuickToDo.Helpers;
 using HabitRPG.QuickToDo.Model;
 using HabitRPG.QuickToDo.Repositories;
@@ -27,6 +27,8 @@ namespace HabitRPG.QuickToDo.ViewModel
     public RelayCommand AddNextTodoCommand { get; private set; }
 
     public RelayCommand ShowSettingsViewCommand { get; private set; }
+
+    public RelayCommand WindowLoadedCommand { get; private set; }
 
     /// <summary>
     /// Initializes a new instance of the MainViewModel class.
@@ -52,6 +54,7 @@ namespace HabitRPG.QuickToDo.ViewModel
       ShowSettingsViewCommand = new RelayCommand(ShowSettingsView);
       AddTodoCommand = new RelayCommand(AddTodo);
       AddNextTodoCommand = new RelayCommand(AddNextTodo);
+      WindowLoadedCommand = new RelayCommand(WindowLoaded);
     }
 
     private void ShowSettingsView()
@@ -106,6 +109,12 @@ namespace HabitRPG.QuickToDo.ViewModel
     {
       await AddTodoTask();
 
+      using (var simpleTracker = new SimpleTracker("UA-51469561-2", string.Empty))
+      {
+        simpleTracker.ThrowOnErrors = true;
+        await simpleTracker.TrackEventAsync("MainWindow", "AddTodo");
+      }
+
       Environment.Exit(0);
     }
 
@@ -113,12 +122,26 @@ namespace HabitRPG.QuickToDo.ViewModel
     {
       await AddTodoTask();
 
+      using (var simpleTracker = new SimpleTracker("UA-51469561-2", string.Empty))
+      {
+        simpleTracker.ThrowOnErrors = true;
+        await simpleTracker.TrackEventAsync("MainWindow", "AddNextTodo");
+      }
+
       TodoTask = new TodoTask();
     }
 
     private void CloseApplication()
     {
       Environment.Exit(0);
+    }
+
+    private async void WindowLoaded()
+    {
+      using (var simpleTracker = new SimpleTracker("UA-51469561-2", string.Empty))
+      {
+        await simpleTracker.TrackPageViewAsync("Main", "View/MainWindow");
+      }
     }
   }
 }
