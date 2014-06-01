@@ -9,6 +9,7 @@ using GoogleAnalyticsTracker.Simple;
 using HabitRPG.QuickToDo.Helpers;
 using HabitRPG.QuickToDo.Model;
 using HabitRPG.QuickToDo.Repositories;
+using HabitRPG.QuickToDo.Services;
 using HabitRPG.QuickToDo.View;
 
 namespace HabitRPG.QuickToDo.ViewModel
@@ -17,6 +18,7 @@ namespace HabitRPG.QuickToDo.ViewModel
   {
     private readonly ITodoRepository _todoRepository;
     private readonly IDialogService _dialogService;
+    private readonly IAnalyticsTracker _analyticsTracker;
 
     private TodoTask _todoTask;
 
@@ -33,7 +35,7 @@ namespace HabitRPG.QuickToDo.ViewModel
     /// <summary>
     /// Initializes a new instance of the MainViewModel class.
     /// </summary>
-    public MainViewModel(ITodoRepository todoRepository, IDialogService dialogService)
+    public MainViewModel(ITodoRepository todoRepository, IDialogService dialogService, IAnalyticsTracker analyticsTracker)
     {
       if (todoRepository == null)
       {
@@ -45,8 +47,14 @@ namespace HabitRPG.QuickToDo.ViewModel
         throw new ArgumentNullException("dialogService");
       }
 
+      if (analyticsTracker == null)
+      {
+        throw new ArgumentNullException("analyticsTracker");
+      }
+
       _todoRepository = todoRepository;
       _dialogService = dialogService;
+      _analyticsTracker = analyticsTracker;
 
       _todoTask = new TodoTask();
 
@@ -108,12 +116,7 @@ namespace HabitRPG.QuickToDo.ViewModel
     private async void AddTodo()
     {
       await AddTodoTask();
-
-      using (var simpleTracker = new SimpleTracker("UA-51469561-2", string.Empty))
-      {
-        simpleTracker.ThrowOnErrors = true;
-        await simpleTracker.TrackEventAsync("MainWindow", "AddTodo");
-      }
+      await _analyticsTracker.TrackEventAsync(ViewTitle.Main, "AddTodo");
 
       Environment.Exit(0);
     }
@@ -121,12 +124,7 @@ namespace HabitRPG.QuickToDo.ViewModel
     private async void AddNextTodo()
     {
       await AddTodoTask();
-
-      using (var simpleTracker = new SimpleTracker("UA-51469561-2", string.Empty))
-      {
-        simpleTracker.ThrowOnErrors = true;
-        await simpleTracker.TrackEventAsync("MainWindow", "AddNextTodo");
-      }
+      await _analyticsTracker.TrackEventAsync(ViewTitle.Main, "AddNextTodo");
 
       TodoTask = new TodoTask();
     }
@@ -138,10 +136,7 @@ namespace HabitRPG.QuickToDo.ViewModel
 
     private async void WindowLoaded()
     {
-      using (var simpleTracker = new SimpleTracker("UA-51469561-2", string.Empty))
-      {
-        await simpleTracker.TrackPageViewAsync("Main", "View/MainWindow");
-      }
+      await _analyticsTracker.TrackPageViewAsync(ViewTitle.Main);
     }
   }
 }

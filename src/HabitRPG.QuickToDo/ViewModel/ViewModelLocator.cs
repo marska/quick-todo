@@ -48,11 +48,16 @@ namespace HabitRPG.QuickToDo.ViewModel
             UserId = Properties.Settings.Default.UserId,
             Proxy = proxy
           });
-
-      SimpleIoc.Default.Register<ITodoRepository, TodoRepository>();
+      
       SimpleIoc.Default.Register<IHabitRPGClient, HabitRPGClient>();
+      
+      SimpleIoc.Default.Register<ITodoRepository, TodoRepository>();
+      
       SimpleIoc.Default.Register<ISettingsService, SettingsService>();
       SimpleIoc.Default.Register<IDialogService, DialogService>();
+
+      SimpleIoc.Default.Register<IAnalyticsTracker, AnalyticsTracker>();
+
       SimpleIoc.Default.Register<MainViewModel>();
       SimpleIoc.Default.Register<SettingsViewModel>();
     }

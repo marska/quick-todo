@@ -109,8 +109,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Helpers\DialogService.cs" />
-    <Compile Include="Helpers\IDialogService.cs" />
+    <Compile Include="Helpers\AnalyticsTracker.cs" />
+    <Compile Include="Services\DialogService.cs" />
+    <Compile Include="Services\IDialogService.cs" />
+    <Compile Include="Helpers\IAnalyticsTracker.cs" />
+    <Compile Include="Helpers\ViewTitle.cs" />
     <Compile Include="Model\Settings.cs" />
     <Compile Include="Model\TodoTask.cs" />
     <Compile Include="Repositories\ITodoRepository.cs" />

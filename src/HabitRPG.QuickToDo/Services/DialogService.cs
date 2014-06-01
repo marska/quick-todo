@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
 
-namespace HabitRPG.QuickToDo.Helpers
+namespace HabitRPG.QuickToDo.Services
 {
   public class DialogService : IDialogService
   {

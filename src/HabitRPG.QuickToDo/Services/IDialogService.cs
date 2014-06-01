@@ -1,9 +1,7 @@
-﻿namespace HabitRPG.QuickToDo.Helpers
+﻿namespace HabitRPG.QuickToDo.Services
 {
   public interface IDialogService
   {
     void ShowErrorMessage(string message); 
   }
-
-  
 }
