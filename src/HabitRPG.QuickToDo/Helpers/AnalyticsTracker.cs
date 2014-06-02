@@ -8,9 +8,9 @@ namespace HabitRPG.QuickToDo.Helpers
 {
   public class AnalyticsTracker : IAnalyticsTracker, IDisposable
   {
-    private const string TrackingAccount = "UA-51469561-2";
+    private const string TrackingAccount = "UA-51548375-2";
 
-    private const string TrackingDomain = "HabitRPG.QuickToDo";
+    private const string TrackingDomain = "marska.github.io";
 
     private readonly SimpleTracker _tracker;
 
