@@ -23,5 +23,12 @@
     <Button Command="{Binding SaveSettingsCommand}" CommandParameter="{Binding ElementName=Window}" Content="Save" HorizontalAlignment="Left" Margin="282,137,0,0" VerticalAlignment="Top" Width="65" FontSize="16" FontFamily="Segoe UI Light"/>
     <Button Command="{Binding CloseWindowCommand}" CommandParameter="{Binding ElementName=Window}" Content="Cancel" HorizontalAlignment="Left" Margin="352,137,0,0" VerticalAlignment="Top" Width="65" FontSize="16" FontFamily="Segoe UI Light"/>
     <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Settings" VerticalAlignment="Top" FontSize="22" FontFamily="Segoe UI Light"/>
+
+    <TextBlock Margin="10,143,296,12">           
+      <Hyperlink NavigateUri="https://habitrpg.com/#/options/settings/api" Command="{Binding NavigateToHabitRpgComCommand}">
+        habitrpg.com/settings
+      </Hyperlink>
+    </TextBlock>
+
   </Grid>
 </Window>

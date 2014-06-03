@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -17,6 +18,8 @@ namespace HabitRPG.QuickToDo.ViewModel
 
     public RelayCommand<Window> CloseWindowCommand { get; private set; }
     public RelayCommand<Window> SaveSettingsCommand { get; private set; }
+
+    public RelayCommand NavigateToHabitRpgComCommand { get; private set; }
 
     public SettingsViewModel(ISettingsService settingsService, IAnalyticsTracker analyticsTracker)
     {
@@ -37,6 +40,7 @@ namespace HabitRPG.QuickToDo.ViewModel
 
       CloseWindowCommand = new RelayCommand<Window>(CloseWindow);
       SaveSettingsCommand = new RelayCommand<Window>(SaveSettings);
+      NavigateToHabitRpgComCommand = new RelayCommand(NavigateToHabitRpgCom);
     }
 
     public Settings Settings
@@ -58,6 +62,11 @@ namespace HabitRPG.QuickToDo.ViewModel
       {
         window.Close();
       }
+    }
+
+    private void NavigateToHabitRpgCom()
+    {
+      Process.Start(new ProcessStartInfo("https://habitrpg.com/#/options/settings/api"));
     }
 
     private void CloseWindow(Window window)
