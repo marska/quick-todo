@@ -40,7 +40,7 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-4 text-center">
-          <a href="download/QuickToDo.zip" download>
+          <a id="download" href="download/QuickToDo.zip" download>
             <i class="fa fa-5x fa-cloud-download"></i>
           </a>
           <h3>DOWNLOAD</h3>
@@ -118,6 +118,11 @@
     ga('create', 'UA-51548375-1', 'marska.github.io');
     ga('send', 'pageview');
   </script>
-
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script>
+    $('#download').on('click', function () {
+      ga('send', 'event', 'download', 'click');
+    });
+  </script>
 </body>
 </html>
