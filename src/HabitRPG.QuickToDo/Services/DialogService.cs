@@ -14,5 +14,16 @@ namespace HabitRPG.QuickToDo.Services
 
       MessageBox.Show(message, "Error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.None);
     }
+
+    public void ShowInformationMessage(string message)
+    {
+      if (message == null)
+      {
+        throw new ArgumentNullException("message");
+      }
+
+      MessageBox.Show(message, "Information", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK, MessageBoxOptions.None);
+    }
+
   }
 }

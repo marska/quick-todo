@@ -11,6 +11,7 @@ namespace HabitRPG.QuickToDo.ViewModel
 {
   public class SettingsViewModel : ViewModelBase
   {
+    private readonly IDialogService _dialogService;
     private readonly ISettingsService _settingsService;
     private readonly IAnalyticsTracker _analyticsTracker;
 
@@ -21,8 +22,13 @@ namespace HabitRPG.QuickToDo.ViewModel
 
     public RelayCommand NavigateToHabitRpgComCommand { get; private set; }
 
-    public SettingsViewModel(ISettingsService settingsService, IAnalyticsTracker analyticsTracker)
+    public SettingsViewModel(IDialogService dialogService, ISettingsService settingsService, IAnalyticsTracker analyticsTracker)
     {
+      if (dialogService == null)
+      {
+        throw new ArgumentNullException("dialogService");
+      }
+
       if (settingsService == null)
       {
         throw new ArgumentNullException("settingsService");
@@ -33,6 +39,7 @@ namespace HabitRPG.QuickToDo.ViewModel
         throw new ArgumentNullException("analyticsTracker");
       }
 
+      _dialogService = dialogService;
       _settingsService = settingsService;
       _analyticsTracker = analyticsTracker;
 
@@ -56,6 +63,7 @@ namespace HabitRPG.QuickToDo.ViewModel
     private void SaveSettings(Window window)
     {
       _settingsService.SetSettings(_settings);
+      _dialogService.ShowInformationMessage("Please restart application to apply changes.");
       _analyticsTracker.TrackEventAsync(ViewTitle.Settings, "SaveSettings");
 
       if (window != null)
