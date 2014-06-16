@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using HabitRPG.Client;
 using HabitRPG.Client.Model;
@@ -24,7 +25,9 @@ namespace HabitRPG.QuickToDo.Repositories
       var todo = new Todo
       {
         Id = Guid.NewGuid().ToString(),
-        Text = todoTaskText
+        Text = todoTaskText,
+        Tags = new Dictionary<Guid, bool>(),
+        //Priority = Difficulty.Easy
       };
       
       var response = await _habitRpgClient.CreateTask(todo);
