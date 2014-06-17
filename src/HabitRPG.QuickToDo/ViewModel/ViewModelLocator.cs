@@ -36,23 +36,23 @@ namespace HabitRPG.QuickToDo.ViewModel
     {
       ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-      var proxy = WebRequest.DefaultWebProxy;
-      proxy.Credentials = CredentialCache.DefaultNetworkCredentials;
+      SimpleIoc.Default.Register<IHabitRPGClient>(() =>
+      {
+        var proxy = WebRequest.DefaultWebProxy;
+        proxy.Credentials = CredentialCache.DefaultNetworkCredentials;
 
-      SimpleIoc.Default.Register(
-        () =>
-          new HabitRpgConfiguration()
-          {
-            ApiToken = Properties.Settings.Default.ApiToken,
-            ServiceUri = new Uri(Properties.Settings.Default.ServiceUri),
-            UserId = Properties.Settings.Default.UserId,
-            Proxy = proxy
-          });
-      
-      SimpleIoc.Default.Register<IHabitRPGClient, HabitRPGClient>();
+        var configuration = new HabitRpgConfiguration()
+        {
+          ApiToken = Properties.Settings.Default.ApiToken,
+          ServiceUri = new Uri(Properties.Settings.Default.ServiceUri),
+          UserId = Properties.Settings.Default.UserId
+        };
+
+        return new HabitRPGClient(configuration, proxy);
+      });
       
       SimpleIoc.Default.Register<ITodoRepository, TodoRepository>();
-      
+
       SimpleIoc.Default.Register<ISettingsService, SettingsService>();
       SimpleIoc.Default.Register<IDialogService, DialogService>();
 

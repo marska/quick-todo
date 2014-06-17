@@ -25,12 +25,10 @@ namespace HabitRPG.QuickToDo.Repositories
       var todo = new Todo
       {
         Id = Guid.NewGuid().ToString(),
-        Text = todoTaskText,
-        Tags = new Dictionary<Guid, bool>(),
-        //Priority = Difficulty.Easy
+        Text = todoTaskText
       };
       
-      var response = await _habitRpgClient.CreateTask(todo);
+      var response = await _habitRpgClient.CreateTaskAsync(todo);
 
       return response.Id;
     }
