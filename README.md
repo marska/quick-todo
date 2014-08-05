@@ -1,7 +1,7 @@
 Quick ToDo
 =========
 
-Quick ToDo is simple Windows application to quick create to-do task in [HabitRPG](https://habitrpg.com)
+QuickToDo is a simple Windows application that allows users to quickly add a To-Do task to [HabitRPG](https://habitrpg.com) without having to go directly to the website. This allows users to quickly add a task when they are thinking about it without having to stop everything and go to the website or pull the phone over.
 
 [Project site](http://marska.github.io/habitrpg-quick-todo/)
 
@@ -15,7 +15,7 @@ How to use it?
 
 1. Download [Quick ToDo](http://marska.github.io/habitrpg-quick-todo/)
 2. Extract zip and copy anywhere you want
-3. Open QuickToDo.exe and copy form [habitrpg.com](https://habitrpg.com/#/options/settings/api) User ID and Api token
+3. Open QuickToDo.exe and copy form [habitrpg.com settings](https://habitrpg.com/#/options/settings/api) User ID and Api token
 4. Save settings and restart application
 
 License
