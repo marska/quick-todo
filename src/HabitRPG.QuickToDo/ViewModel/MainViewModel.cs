@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using GoogleAnalyticsTracker.Simple;
 using HabitRPG.QuickToDo.Helpers;
 using HabitRPG.QuickToDo.Model;
 using HabitRPG.QuickToDo.Repositories;
@@ -21,6 +20,10 @@ namespace HabitRPG.QuickToDo.ViewModel
     private readonly IAnalyticsTracker _analyticsTracker;
 
     private TodoTask _todoTask;
+
+    private bool _isBusy;
+
+    private Visibility _tbTodoVisibility;
 
     public RelayCommand CloseApplicationCommand { get; private set; }
 
@@ -85,6 +88,27 @@ namespace HabitRPG.QuickToDo.ViewModel
       }
     }
 
+    public bool IsBusy
+    {
+      get { return _isBusy; }
+      set
+      {
+        _isBusy = value;
+        RaisePropertyChanged("IsBusy");
+      }
+    }
+
+    public Visibility TbTodoVisibility
+    {
+      get { return _tbTodoVisibility; }
+      set
+      {
+        _tbTodoVisibility = value;
+        RaisePropertyChanged("TbTodoVisibility");
+      }
+    }
+
+
     private async Task<string> AddTodoTask()
     {
       try
@@ -115,6 +139,7 @@ namespace HabitRPG.QuickToDo.ViewModel
 
     private async void AddTodo()
     {
+      ShowProgressRing();
       await AddTodoTask();
       await _analyticsTracker.TrackEventAsync(ViewTitle.Main, "AddTodo");
 
@@ -123,8 +148,10 @@ namespace HabitRPG.QuickToDo.ViewModel
 
     private async void AddNextTodo()
     {
+      ShowProgressRing();
       await AddTodoTask();
       await _analyticsTracker.TrackEventAsync(ViewTitle.Main, "AddNextTodo");
+      HideProgressRing();
 
       TodoTask = new TodoTask();
     }
@@ -137,6 +164,18 @@ namespace HabitRPG.QuickToDo.ViewModel
     private async void WindowLoaded()
     {
       await _analyticsTracker.TrackPageViewAsync(ViewTitle.Main);
+    }
+
+    private void ShowProgressRing()
+    {
+      IsBusy = true;
+      TbTodoVisibility = Visibility.Hidden;
+    }
+
+    private void HideProgressRing()
+    {
+      IsBusy = false;
+      TbTodoVisibility = Visibility.Visible;
     }
   }
 }

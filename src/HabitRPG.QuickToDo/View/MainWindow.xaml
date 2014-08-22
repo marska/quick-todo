@@ -2,6 +2,8 @@
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:helpers="clr-namespace:HabitRPG.QuickToDo.Helpers"
         Title="HabitRPG New To-Do" 
         Height="135" 
         Width="800" 
@@ -10,7 +12,7 @@
         WindowStartupLocation="CenterScreen"
 		    AllowsTransparency="True"
         ResizeMode="NoResize"
-        FocusManager.FocusedElement="{Binding ElementName=TbTodo}" 
+        FocusManager.FocusedElement = "{Binding ElementName=TbTodo}" 
         MouseDown="WindowMouseDown">
   <i:Interaction.Triggers>
     <i:EventTrigger EventName="Loaded">
@@ -124,11 +126,12 @@
     <Button x:Name="BtnAdd" IsDefault="true" Command="{Binding AddTodoCommand}"  Content="Button" HorizontalAlignment="Left" Margin="714,40,0,0" VerticalAlignment="Top" Width="60" Template="{DynamicResource AddButtonControlTemplate}" Height="60"/>
     <Button x:Name="BtnSettings" Command="{Binding ShowSettingsViewCommand}"  Content="Button" HorizontalAlignment="Left" Margin="758.75,1,0,0" VerticalAlignment="Top" Width="20" Template="{DynamicResource SettingsButtonControlTemplate}" Height="20"/>
     <Button x:Name="BtnClose" Content="Button" HorizontalAlignment="Left" Margin="778.75,1,0,0" VerticalAlignment="Top" Width="20" Template="{DynamicResource CloseButtonControlTemplate}" Height="20" Command="{Binding CloseApplicationCommand, Mode=OneWay}"/>
-    <TextBox x:Name="TbTodo" HorizontalAlignment="Left" Height="80" Margin="30,31,0,0" TextWrapping="NoWrap" Text="{Binding TodoTask.Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="651" FontSize="56" Style="{DynamicResource TodoTextBoxStyle}" SelectionBrush="#FF727272" BorderBrush="{x:Null}" FontFamily="Segoe UI Light">
+    <TextBox x:Name="TbTodo" HorizontalAlignment="Left" Height="80" Margin="30,31,0,0" TextWrapping="NoWrap" Visibility="{Binding TbTodoVisibility}" Text="{Binding TodoTask.Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="651" FontSize="56" Style="{DynamicResource TodoTextBoxStyle}" SelectionBrush="#FF727272" BorderBrush="{x:Null}" FontFamily="Segoe UI Light" IsVisibleChanged="TbTodo_IsVisibleChanged">
       <TextBox.InputBindings>
         <KeyBinding  Modifiers="Alt" Key="Enter" Command="{Binding AddNextTodoCommand}" />
       </TextBox.InputBindings>
-      </TextBox>
-      <Label Content="HABIT RPG QUICK TODO" HorizontalAlignment="Left" Margin="344,1,0,0" VerticalAlignment="Top" FontFamily="Segoe UI Light" FontSize="14"/>
+    </TextBox>
+    <Label Content="HABIT RPG QUICK TODO" HorizontalAlignment="Left" Margin="344,1,0,0" VerticalAlignment="Top" FontFamily="Segoe UI Light" FontSize="14"/>
+    <controls:ProgressRing IsActive="{Binding IsBusy}" />
   </Grid>
 </Window>

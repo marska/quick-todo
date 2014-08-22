@@ -1,5 +1,7 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace HabitRPG.QuickToDo.View
 {
@@ -17,7 +19,17 @@ namespace HabitRPG.QuickToDo.View
     private void WindowMouseDown(object sender, MouseButtonEventArgs e)
     {
       if (e.ChangedButton == MouseButton.Left)
+      {
         DragMove();
+      }
+    }
+
+    private void TbTodo_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+    {
+      if (Visibility == Visibility.Visible)
+      {
+        Dispatcher.BeginInvoke((Action)(() => Keyboard.Focus(TbTodo)), DispatcherPriority.Render);
+      }
     }
   }
 }
