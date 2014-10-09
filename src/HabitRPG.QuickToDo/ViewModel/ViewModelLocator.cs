@@ -36,7 +36,7 @@ namespace HabitRPG.QuickToDo.ViewModel
     {
       ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-      SimpleIoc.Default.Register<IHabitRPGClient>(() =>
+      SimpleIoc.Default.Register<IUserClient>(() =>
       {
         var proxy = WebRequest.DefaultWebProxy;
         proxy.Credentials = CredentialCache.DefaultNetworkCredentials;
@@ -48,7 +48,7 @@ namespace HabitRPG.QuickToDo.ViewModel
           UserId = Properties.Settings.Default.UserId
         };
 
-        return new HabitRPGClient(configuration, proxy);
+        return new UserClient(configuration, proxy);
       });
       
       SimpleIoc.Default.Register<ITodoRepository, TodoRepository>();

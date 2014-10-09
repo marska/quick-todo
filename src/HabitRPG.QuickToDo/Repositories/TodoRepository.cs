@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using HabitRPG.Client;
 using HabitRPG.Client.Model;
@@ -8,16 +7,16 @@ namespace HabitRPG.QuickToDo.Repositories
 {
   public class TodoRepository : ITodoRepository
   {
-    private readonly IHabitRPGClient _habitRpgClient;
+    private readonly IUserClient _userClient;
 
-    public TodoRepository(IHabitRPGClient habitRpgClient)
+    public TodoRepository(IUserClient userClient)
     {
-      if (habitRpgClient == null)
+      if (userClient == null)
       {
-        throw new ArgumentNullException("habitRpgClient");
+        throw new ArgumentNullException("userClient");
       }
 
-      _habitRpgClient = habitRpgClient;
+      _userClient = userClient;
     }
 
     public async Task<string> Create(string todoTaskText)
@@ -27,8 +26,8 @@ namespace HabitRPG.QuickToDo.Repositories
         Id = Guid.NewGuid().ToString(),
         Text = todoTaskText
       };
-      
-      var response = await _habitRpgClient.CreateTaskAsync(todo);
+
+      var response = await _userClient.CreateTaskAsync(todo);
 
       return response.Id;
     }
