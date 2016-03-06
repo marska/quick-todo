@@ -2,9 +2,9 @@ version: 1.0.{build}
 os: Visual Studio 2015
 configuration: Release
 before_build:
-  - nuget restore src\HabitRPG.sln
+  - nuget restore src\QuickToDo.sln
 build:
-  project: src\HabitRPG.sln
+  project: src\QuickToDo.sln
   verbosity: minimal
 artifacts:
   - path: bin
