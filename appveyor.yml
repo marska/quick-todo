@@ -8,5 +8,5 @@ build:
   verbosity: minimal
 artifacts:
   - path: bin
-    name: HabitRPGHabitRPG
+    name: QuickToDo
     type: zip
