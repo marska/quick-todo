@@ -1,3 +1,5 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/tbkg460dyjat30wh?svg=true)](https://ci.appveyor.com/project/marska/quick-todo)
+
 Quick ToDo
 =========
 
