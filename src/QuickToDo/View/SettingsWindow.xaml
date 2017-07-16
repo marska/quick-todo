@@ -1,34 +1,40 @@
 ﻿<Window
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-	x:Class="QuickToDo.View.SettingsWindow"
+	xmlns:helpers="clr-namespace:QuickToDo.Helpers"
+  xmlns:model="clr-namespace:QuickToDo.Model"
+  x:Class="QuickToDo.View.SettingsWindow"
 	x:Name="Window"
 	Title="Settings"
-	Width="427" Height="173.5" 
+	Width="429.905" Height="224.996" 
   ResizeMode="NoResize" 
   WindowStartupLocation="CenterOwner"
   ShowInTaskbar="False" 
   WindowStyle="None" BorderThickness="0"
   DataContext="{Binding Settings, Source={StaticResource Locator}}">
-
+  <Window.Resources>
+    <helpers:EnumToBoolConverter x:Key="EbConverter"/>
+  </Window.Resources>
   <Window.InputBindings>
     <KeyBinding Key="Escape" Command="{Binding CloseWindowCommand}" CommandParameter="{Binding ElementName=Window}"/>
   </Window.InputBindings>
   <Grid x:Name="LayoutRoot">
     <Rectangle Stroke="Black" Opacity="0.5"/>
-    <TextBlock HorizontalAlignment="Left" Margin="10,87,0,0" TextWrapping="Wrap" Text="API Token" VerticalAlignment="Top" FontSize="16" RenderTransformOrigin="1.391,1.057" FontFamily="Segoe UI Light"/>
-    <TextBlock HorizontalAlignment="Left" Margin="10,55,0,0" TextWrapping="Wrap" Text="User ID" VerticalAlignment="Top" FontSize="16" FontFamily="Segoe UI Light"/>
-    <TextBox Text="{Binding Settings.UserId, Mode=TwoWay}" HorizontalAlignment="Left" Height="26" Margin="92,55,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="325" FontSize="16" FontFamily="Segoe UI Light"/>
-    <TextBox Text="{Binding Settings.ApiToken, Mode=TwoWay}" HorizontalAlignment="Left" Height="26" Margin="92,86,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="325" FontSize="16" FontFamily="Segoe UI Light"/>
-    <Button Command="{Binding SaveSettingsCommand}" CommandParameter="{Binding ElementName=Window}" Content="Save" HorizontalAlignment="Left" Margin="282,137,0,0" VerticalAlignment="Top" Width="65" FontSize="16" FontFamily="Segoe UI Light"/>
-    <Button Command="{Binding CloseWindowCommand}" CommandParameter="{Binding ElementName=Window}" Content="Cancel" HorizontalAlignment="Left" Margin="352,137,0,0" VerticalAlignment="Top" Width="65" FontSize="16" FontFamily="Segoe UI Light"/>
+    <TextBlock HorizontalAlignment="Left" Margin="10,132,0,0" TextWrapping="Wrap" Text="API Token" VerticalAlignment="Top" FontSize="16" RenderTransformOrigin="1.391,1.057" FontFamily="Segoe UI Light"/>
+    <TextBlock HorizontalAlignment="Left" Margin="10,100,0,0" TextWrapping="Wrap" Text="User ID" VerticalAlignment="Top" FontSize="16" FontFamily="Segoe UI Light"/>
+    <TextBox Text="{Binding Settings.UserId, Mode=TwoWay}" HorizontalAlignment="Left" Height="26" Margin="92,100,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="325" FontSize="16" FontFamily="Segoe UI Light"/>
+    <TextBox Text="{Binding Settings.ApiToken, Mode=TwoWay}" HorizontalAlignment="Left" Height="26" Margin="92,131,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="325" FontSize="16" FontFamily="Segoe UI Light"/>
+    <Button Command="{Binding SaveSettingsCommand}" CommandParameter="{Binding ElementName=Window}" Content="Save" HorizontalAlignment="Left" Margin="282,182,0,0" VerticalAlignment="Top" Width="65" FontSize="16" FontFamily="Segoe UI Light"/>
+    <Button Command="{Binding CloseWindowCommand}" CommandParameter="{Binding ElementName=Window}" Content="Cancel" HorizontalAlignment="Left" Margin="352,182,0,0" VerticalAlignment="Top" Width="65" FontSize="16" FontFamily="Segoe UI Light"/>
     <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Settings" VerticalAlignment="Top" FontSize="22" FontFamily="Segoe UI Light"/>
-
-    <TextBlock Margin="10,143,296,12">           
-      <Hyperlink NavigateUri="https://habitrpg.com/#/options/settings/api" Command="{Binding NavigateToHabitRpgComCommand}">
-        habitrpg.com/settings
-      </Hyperlink>
-    </TextBlock>
-
+    <TextBlock HorizontalAlignment="Left" Margin="10,65,0,0" TextWrapping="Wrap" Text="Service" VerticalAlignment="Top" FontSize="16" FontFamily="Segoe UI Light"/>
+    <RadioButton GroupName="ServiceGroup" Content="Wunderlist" HorizontalAlignment="Left" Margin="92,70,0,0" VerticalAlignment="Top" 
+                 IsChecked="{Binding Path=Settings.ServiceType, 
+                Converter={StaticResource EbConverter}, 
+                ConverterParameter={x:Static model:ServiceTypes.Wunderlist}}" />
+    <RadioButton GroupName="ServiceGroup" Content="Habitica" HorizontalAlignment="Left" Margin="187,70,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.392,1.495" 
+                 IsChecked="{Binding Path=Settings.ServiceType, 
+                Converter={StaticResource EbConverter}, 
+                ConverterParameter={x:Static model:ServiceTypes.Habitica}}" />
   </Grid>
 </Window>

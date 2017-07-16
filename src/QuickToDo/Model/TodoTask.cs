@@ -6,34 +6,13 @@ namespace QuickToDo.Model
   public class TodoTask : INotifyPropertyChanged
   {
     private string _text;
-    private string _notes;
 
     public string Text
     {
-      get
-      {
-        return _text;
-      }
+      get => _text;
       set
       {
         _text = value;
-        OnPropertyChanged();
-      }
-    }
-
-    public string Notes
-    {
-      get
-      {
-        return _notes;
-      }
-      set
-      {
-        if (_notes == value)
-        {
-          return;
-        }
-        _notes = value;
         OnPropertyChanged();
       }
     }
@@ -42,12 +21,7 @@ namespace QuickToDo.Model
     
     protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
     {
-      var handler = PropertyChanged;
-
-      if (handler != null)
-      {
-        handler(this, new PropertyChangedEventArgs(propertyName));
-      }
+      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
   }
 }

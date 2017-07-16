@@ -2,14 +2,14 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="QuickToDo.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="ApiToken" Type="System.Guid" Scope="User">
-      <Value Profile="(Default)">00000000-0000-0000-0000-000000000000</Value>
+    <Setting Name="ApiToken" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="UserId" Type="System.Guid" Scope="User">
-      <Value Profile="(Default)">00000000-0000-0000-0000-000000000000</Value>
+    <Setting Name="UserId" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="ServiceUri" Type="(Web Service URL)" Scope="User">
-      <Value Profile="(Default)">https://habitrpg.com/</Value>
+    <Setting Name="ServiceType" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Wunderlist</Value>
     </Setting>
   </Settings>
 </SettingsFile>

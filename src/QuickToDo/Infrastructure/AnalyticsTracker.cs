@@ -2,9 +2,9 @@
 using System.Globalization;
 using System.Threading.Tasks;
 using GoogleAnalyticsTracker.Simple;
-using QuickToDo.Services;
+using QuickToDo.Helpers;
 
-namespace QuickToDo.Helpers
+namespace QuickToDo.Infrastructure
 {
   public class AnalyticsTracker : IAnalyticsTracker, IDisposable
   {
@@ -18,18 +18,15 @@ namespace QuickToDo.Helpers
     {
       if (settingsService == null)
       {
-        throw new ArgumentNullException("settingsService");
+        throw new ArgumentNullException(nameof(settingsService));
       }
 
       _tracker = new SimpleTracker(TrackingAccount, TrackingDomain);
 
       var userId = settingsService.GetSettings().UserId;
-
-      if (userId.HasValue)
-      {
-        _tracker.UserAgent = userId.Value.ToString();
-      }
-
+      
+      _tracker.UserAgent = userId;
+      
       _tracker.Language = CultureInfo.CurrentCulture.Name;
     }
 

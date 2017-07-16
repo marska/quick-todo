@@ -4,8 +4,10 @@ using System.Windows;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using QuickToDo.Helpers;
+using QuickToDo.Infrastructure;
 using QuickToDo.Model;
 using QuickToDo.Services;
+using Settings = QuickToDo.Model.Settings;
 
 namespace QuickToDo.ViewModel
 {
@@ -17,31 +19,17 @@ namespace QuickToDo.ViewModel
 
     private Settings _settings;
 
-    public RelayCommand<Window> CloseWindowCommand { get; private set; }
-    public RelayCommand<Window> SaveSettingsCommand { get; private set; }
+    public RelayCommand<Window> CloseWindowCommand { get; }
+    
+    public RelayCommand<Window> SaveSettingsCommand { get; }
 
-    public RelayCommand NavigateToHabitRpgComCommand { get; private set; }
+    public RelayCommand NavigateToHabitRpgComCommand { get; }
 
     public SettingsViewModel(IDialogService dialogService, ISettingsService settingsService, IAnalyticsTracker analyticsTracker)
     {
-      if (dialogService == null)
-      {
-        throw new ArgumentNullException("dialogService");
-      }
-
-      if (settingsService == null)
-      {
-        throw new ArgumentNullException("settingsService");
-      }
-
-      if (analyticsTracker == null)
-      {
-        throw new ArgumentNullException("analyticsTracker");
-      }
-
-      _dialogService = dialogService;
-      _settingsService = settingsService;
-      _analyticsTracker = analyticsTracker;
+      _dialogService = dialogService ?? throw new ArgumentNullException(nameof(dialogService));
+      _settingsService = settingsService ?? throw new ArgumentNullException(nameof(settingsService));
+      _analyticsTracker = analyticsTracker ?? throw new ArgumentNullException(nameof(analyticsTracker));
 
       _settings = _settingsService.GetSettings();
 
@@ -52,7 +40,7 @@ namespace QuickToDo.ViewModel
 
     public Settings Settings
     {
-      get { return _settings; }
+      get => _settings;
       set
       {
         _settings = value;
@@ -79,10 +67,7 @@ namespace QuickToDo.ViewModel
 
     private void CloseWindow(Window window)
     {
-      if (window != null)
-      {
-        window.Close();
-      }
+      window?.Close();
     }
   }
 }

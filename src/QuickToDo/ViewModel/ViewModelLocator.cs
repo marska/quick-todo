@@ -14,12 +14,12 @@
 
 using System;
 using System.Net;
+using System.Configuration;
 using GalaSoft.MvvmLight.Ioc;
 using HabitRPG.Client;
-using QuickToDo.Helpers;
-using QuickToDo.Repositories;
 using QuickToDo.Services;
 using Microsoft.Practices.ServiceLocation;
+using QuickToDo.Infrastructure;
 
 namespace QuickToDo.ViewModel
 {
@@ -35,27 +35,33 @@ namespace QuickToDo.ViewModel
     public ViewModelLocator()
     {
       ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-
-      SimpleIoc.Default.Register<IUserClient>(() =>
-      {
-        var proxy = WebRequest.DefaultWebProxy;
-        proxy.Credentials = CredentialCache.DefaultNetworkCredentials;
-
-        var configuration = new HabitRpgConfiguration()
-        {
-          ApiToken = Properties.Settings.Default.ApiToken,
-          ServiceUri = new Uri(Properties.Settings.Default.ServiceUri),
-          UserId = Properties.Settings.Default.UserId
-        };
-
-        return new UserClient(configuration, proxy);
-      });
       
-      SimpleIoc.Default.Register<ITodoRepository, TodoRepository>();
+      if (Properties.Settings.Default.ServiceType == "Wunderlist")
+      {
+        SimpleIoc.Default.Register<ITaskService>(() => new WunderlistService(Properties.Settings.Default.ApiToken, Properties.Settings.Default.UserId));
+      }
+      else if (Properties.Settings.Default.ServiceType == "Habitica")
+      {
+        SimpleIoc.Default.Register<IUserClient>(() =>
+        {
+          var proxy = WebRequest.DefaultWebProxy;
+          proxy.Credentials = CredentialCache.DefaultNetworkCredentials;
 
-      SimpleIoc.Default.Register<ISettingsService, SettingsService>();
+          var configuration = new HabitRpgConfiguration()
+          {
+            ApiToken = Guid.Parse(Properties.Settings.Default.ApiToken),
+            ServiceUri = new Uri(ConfigurationManager.AppSettings["HabiticaApiUri"]),
+            UserId = Guid.Parse(Properties.Settings.Default.UserId)
+          };
+
+          return new UserClient(configuration, proxy);
+        });
+        
+        SimpleIoc.Default.Register<ITaskService, HabiticaService>();
+      }
+
+      SimpleIoc.Default.Register<ISettingsService, Settings>();
       SimpleIoc.Default.Register<IDialogService, DialogService>();
-
       SimpleIoc.Default.Register<IAnalyticsTracker, AnalyticsTracker>();
 
       SimpleIoc.Default.Register<MainViewModel>();

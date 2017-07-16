@@ -6,16 +6,15 @@ namespace QuickToDo.Model
 {
   public class Settings : INotifyPropertyChanged
   {
-    private Guid? _apiToken;
+    private string _apiToken;
 
-    private Guid? _userId;
-
-    public Guid? ApiToken
+    private string _userId;
+    
+    private ServiceTypes _serviceType;
+    
+    public string ApiToken
     {
-      get
-      {
-        return _apiToken;
-      }
+      get => _apiToken;
       set
       {
         _apiToken = value;
@@ -23,12 +22,9 @@ namespace QuickToDo.Model
       }
     }
 
-    public Guid? UserId
+    public string UserId
     {
-      get
-      {
-        return _userId;
-      }
+      get => _userId;
       set
       {
         _userId = value;
@@ -36,16 +32,21 @@ namespace QuickToDo.Model
       }
     }
 
+    public ServiceTypes ServiceType
+    {
+      get => _serviceType;
+      set
+      {
+        _serviceType = value;
+        OnPropertyChanged();
+      }
+    }
+    
     public event PropertyChangedEventHandler PropertyChanged;
 
     protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
     {
-      var handler = PropertyChanged;
-
-      if (handler != null)
-      {
-        handler(this, new PropertyChangedEventArgs(propertyName));
-      }
+      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
   }
 }

@@ -1,4 +1,4 @@
-﻿namespace QuickToDo.Services
+﻿namespace QuickToDo.Infrastructure
 {
   public interface IDialogService
   {

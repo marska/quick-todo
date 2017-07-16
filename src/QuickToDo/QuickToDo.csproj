@@ -93,6 +93,7 @@
       <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Net" />
     <Reference Include="System.Net.Http" />
@@ -125,17 +126,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Helpers\AnalyticsTracker.cs" />
-    <Compile Include="Services\DialogService.cs" />
-    <Compile Include="Services\IDialogService.cs" />
-    <Compile Include="Helpers\IAnalyticsTracker.cs" />
+    <Compile Include="Infrastructure\AnalyticsTracker.cs" />
+    <Compile Include="Helpers\EnumToBoolConverter.cs" />
+    <Compile Include="Model\ServiceTypes.cs" />
+    <Compile Include="Infrastructure\DialogService.cs" />
+    <Compile Include="Services\Dto\WunderlistList.cs" />
+    <Compile Include="Infrastructure\IDialogService.cs" />
+    <Compile Include="Infrastructure\IAnalyticsTracker.cs" />
     <Compile Include="Helpers\ViewTitle.cs" />
     <Compile Include="Model\Settings.cs" />
     <Compile Include="Model\TodoTask.cs" />
-    <Compile Include="Repositories\ITodoRepository.cs" />
-    <Compile Include="Repositories\TodoRepository.cs" />
-    <Compile Include="Services\ISettingsService.cs" />
-    <Compile Include="Services\SettingsService.cs" />
+    <Compile Include="Services\HabiticaService.cs" />
+    <Compile Include="Infrastructure\ISettingsService.cs" />
+    <Compile Include="Services\ITaskService.cs" />
+    <Compile Include="Infrastructure\Settings.cs" />
+    <Compile Include="Services\WunderlistService.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
@@ -208,6 +213,7 @@
   <ItemGroup>
     <Resource Include="Resources\logo.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
   <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">

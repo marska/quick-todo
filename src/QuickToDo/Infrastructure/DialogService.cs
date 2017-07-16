@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Windows;
+using QuickToDo.Services;
 
-namespace QuickToDo.Services
+namespace QuickToDo.Infrastructure
 {
   public class DialogService : IDialogService
   {

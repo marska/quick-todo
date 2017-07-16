@@ -25,10 +25,10 @@ namespace QuickToDo.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("00000000-0000-0000-0000-000000000000")]
-        public global::System.Guid ApiToken {
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ApiToken {
             get {
-                return ((global::System.Guid)(this["ApiToken"]));
+                return ((string)(this["ApiToken"]));
             }
             set {
                 this["ApiToken"] = value;
@@ -37,10 +37,10 @@ namespace QuickToDo.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("00000000-0000-0000-0000-000000000000")]
-        public global::System.Guid UserId {
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string UserId {
             get {
-                return ((global::System.Guid)(this["UserId"]));
+                return ((string)(this["UserId"]));
             }
             set {
                 this["UserId"] = value;
@@ -49,14 +49,13 @@ namespace QuickToDo.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://habitrpg.com/")]
-        public string ServiceUri {
+        [global::System.Configuration.DefaultSettingValueAttribute("Wunderlist")]
+        public string ServiceType {
             get {
-                return ((string)(this["ServiceUri"]));
+                return ((string)(this["ServiceType"]));
             }
             set {
-                this["ServiceUri"] = value;
+                this["ServiceType"] = value;
             }
         }
     }

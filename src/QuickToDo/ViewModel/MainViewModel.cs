@@ -6,8 +6,8 @@ using System.Windows;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using QuickToDo.Helpers;
+using QuickToDo.Infrastructure;
 using QuickToDo.Model;
-using QuickToDo.Repositories;
 using QuickToDo.Services;
 using QuickToDo.View;
 
@@ -15,7 +15,7 @@ namespace QuickToDo.ViewModel
 {
   public class MainViewModel : ViewModelBase
   {
-    private readonly ITodoRepository _todoRepository;
+    private readonly ITaskService _taskService;
     private readonly IDialogService _dialogService;
     private readonly IAnalyticsTracker _analyticsTracker;
 
@@ -35,29 +35,11 @@ namespace QuickToDo.ViewModel
 
     public RelayCommand WindowLoadedCommand { get; private set; }
 
-    /// <summary>
-    /// Initializes a new instance of the MainViewModel class.
-    /// </summary>
-    public MainViewModel(ITodoRepository todoRepository, IDialogService dialogService, IAnalyticsTracker analyticsTracker)
+    public MainViewModel(ITaskService taskService, IDialogService dialogService, IAnalyticsTracker analyticsTracker)
     {
-      if (todoRepository == null)
-      {
-        throw new ArgumentNullException("todoRepository");
-      }
-
-      if (dialogService == null)
-      {
-        throw new ArgumentNullException("dialogService");
-      }
-
-      if (analyticsTracker == null)
-      {
-        throw new ArgumentNullException("analyticsTracker");
-      }
-
-      _todoRepository = todoRepository;
-      _dialogService = dialogService;
-      _analyticsTracker = analyticsTracker;
+      _taskService = taskService ?? throw new ArgumentNullException("taskService");
+      _dialogService = dialogService ?? throw new ArgumentNullException("dialogService");
+      _analyticsTracker = analyticsTracker ?? throw new ArgumentNullException("analyticsTracker");
 
       _todoTask = new TodoTask();
 
@@ -109,11 +91,11 @@ namespace QuickToDo.ViewModel
     }
 
 
-    private async Task<string> AddTodoTask()
+    private async Task AddTodoTask()
     {
       try
       {
-        return await _todoRepository.Create(_todoTask.Text);
+        await _taskService.Create(_todoTask.Text);
       }
       catch (HttpRequestException ex)
       {
@@ -133,8 +115,6 @@ namespace QuickToDo.ViewModel
       {
         _dialogService.ShowErrorMessage(ex.Message);
       }
-
-      return string.Empty;
     }
 
     private async void AddTodo()
