@@ -131,7 +131,7 @@
         <KeyBinding  Modifiers="Alt" Key="Enter" Command="{Binding AddNextTodoCommand}" />
       </TextBox.InputBindings>
     </TextBox>
-    <Label Content="HABIT RPG QUICK TODO" HorizontalAlignment="Left" Margin="344,1,0,0" VerticalAlignment="Top" FontFamily="Segoe UI Light" FontSize="14"/>
+    <Label Content="QUICK TODO" HorizontalAlignment="Left" Margin="344,1,0,0" VerticalAlignment="Top" FontFamily="Segoe UI Light" FontSize="14"/>
     <controls:ProgressRing IsActive="{Binding IsBusy}" />
   </Grid>
 </Window>
